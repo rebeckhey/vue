@@ -1,28 +1,44 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+   <headder title="TODOLIST"/>
+  <forms />
+  <todos :todos="todos" @deleteBtn="deleteBtn" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import headder from './components/headder'
+import forms from './components/forms'
+import todos from './components/todosMapp/todos'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+   headder,
+   forms,
+   todos
+  },
+  data(){
+    return {
+      todos:[
+        {_id:'1', title:'Städa', completed:true},
+         {_id:'2', title:'Laga mat', completed:false},
+          {_id:'3', title:'Diska', completed:false},
+           {_id:'4', title:'Rensa', completed:false}
+      ]
+    }
+  },
+  methods:{
+    deleteBtn(id){
+      this.todos = !this.todos.filter(todo => todo._id !== id) // döper varje objekt till todo. 
+      // Kollar om: todo._id inte matchar id som har tryckts på, matchar den så ska den ligga kvar, matchar den inte
+      //ska den inte ligga kvar. (filter loopar igenom arrayen, sen ska den ha condition true eller false)
+
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
